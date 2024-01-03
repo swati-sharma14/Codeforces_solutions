@@ -19,21 +19,19 @@ bool check(string s, ll index){
 
 int main(){
     string a, b;
-
     cin >> a >> b;
 
-    map<string, ll> a_divisors;
-
-    for(ll i = 1; i <= a.size(); i++){
-        if(check(a, i)) a_divisors[a.substr(0, i)] = 1;
-    }
-
-    ll ans = 0;
-    for(ll i = 1; i <= b.size(); i++){
-        if(check(b, i) && a_divisors[b.substr(0, i)]) ans += 1;
+    ll count = 0;
+    ll length = min(a.size(), b.size());
+    
+    for(ll i=1; i<=length; i++){
+        if((a.size()%i == 0) && (b.size()%i == 0)){
+            if(a.substr(0,i) == b.substr(0, i)){
+                if(check(a,i) && check(b,i)) count++;
+            }
+        }
     }
     
-    cout << ans << endl;
-
+    cout << count << endl;
     return 0;
 }
